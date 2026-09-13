@@ -16,8 +16,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
   const [added, setAdded] = useState({})
   const [selected, setSelected] = useState(null)
 
-  const addToCart = (product, e) => {
-    e.stopPropagation()
+  const addToCart = (product) => {
     setCart(prev => {
       const exists = prev.find(i => i.id === product.id)
       if (exists) return prev.map(i => i.id === product.id ? { ...i, qty: i.qty + 1 } : i)
@@ -35,8 +34,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
     setTimeout(() => setAdded(a => ({ ...a, [product.id]: false })), 2000)
   }
 
-  const toggleWishlist = (product, e) => {
-    e.stopPropagation()
+  const toggleWishlist = (product) => {
     const inWL = wishlist.includes(product.id)
     setWishlist(prev => inWL ? prev.filter(i => i !== product.id) : [...prev, product.id])
     if (!inWL) fire('AddToWishlist', { content_id: product.id, content_name: product.name })
@@ -65,14 +63,14 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
           {PRODUCTS.map(p => (
             <div
               key={p.id}
-              onClick={() => viewProduct(p)}
+              onClick={(e) => { if (!e.target.closest('button')) viewProduct(p) }}
               className="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
             >
               {/* Image area */}
               <div className={`h-44 bg-gradient-to-br ${p.color} flex items-center justify-center text-6xl relative`}>
                 {p.emoji}
                 <button
-                  onClick={e => toggleWishlist(p, e)}
+                  onClick={() => toggleWishlist(p)}
                   className="btn-wishlist absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
                 >
                   <Heart
@@ -91,7 +89,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
 
                 <div className="flex gap-2">
                   <button
-                    onClick={e => addToCart(p, e)}
+                    onClick={() => addToCart(p)}
                     id="btn-add-to-cart"
                     className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold text-sm transition-all ${
                       added[p.id]
@@ -102,7 +100,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
                     {added[p.id] ? <><Check size={15} /> Đã thêm</> : <><ShoppingCart size={15} /> Thêm giỏ</>}
                   </button>
                   <button
-                    onClick={e => { e.stopPropagation(); viewProduct(p) }}
+                    onClick={() => viewProduct(p)}
                     className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50 text-slate-500 hover:text-slate-900 transition-colors"
                   >
                     <Eye size={16} />
@@ -126,13 +124,13 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
             <div className="text-2xl font-bold text-blue-600 mb-4">{fmt(selected.price)}</div>
             <div className="flex gap-3">
               <button
-                onClick={e => { addToCart(selected, e); setSelected(null) }}
+                onClick={() => { addToCart(selected); setSelected(null) }}
                 className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-semibold transition-colors"
               >
                 Thêm vào giỏ hàng
               </button>
               <button
-                onClick={() => { toggleWishlist(selected, { stopPropagation: () => {} }); }}
+                onClick={() => toggleWishlist(selected)}
                 className="w-12 h-12 border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50"
               >
                 <Heart size={20} className={wishlist.includes(selected.id) ? 'fill-red-500 text-red-500' : 'text-slate-400'} />
