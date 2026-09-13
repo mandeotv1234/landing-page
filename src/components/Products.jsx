@@ -92,7 +92,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
                 <div className="flex gap-2">
                   <button
                     onClick={e => addToCart(p, e)}
-                    className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold text-sm transition-all ${
+                    className={`btn-add-to-cart flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold text-sm transition-all ${
                       added[p.id]
                         ? 'bg-green-500 text-white'
                         : 'bg-blue-600 hover:bg-blue-500 text-white'

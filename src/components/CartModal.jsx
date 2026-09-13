@@ -57,6 +57,7 @@ export default function CartModal({ cart, setCart, onClose, onCheckout }) {
               <span className="text-blue-600">{fmt(total)}</span>
             </div>
             <button
+              id="btn-initiate-checkout"
               onClick={onCheckout}
               className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-colors text-lg"
             >

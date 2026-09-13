@@ -107,7 +107,7 @@ export default function CheckoutModal({ cart, onClose, fire }) {
               </div>
               <div className="flex justify-between items-center pt-2">
                 <button type="button" onClick={() => setStep(1)} className="text-slate-500 hover:text-slate-800 text-sm">← Quay lại</button>
-                <button type="submit" className="bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-colors">
+                <button id="btn-purchase" type="submit" className="bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-colors">
                   Xác nhận đặt hàng {fmt(total)}
                 </button>
               </div>

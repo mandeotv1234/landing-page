@@ -145,7 +145,7 @@ export default function Sections({ fire }) {
                   className="w-full border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Số điện thoại" />
                 <div className="flex gap-3">
-                  <button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                  <button id="btn-lead" type="submit" className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
                     Gửi yêu cầu tư vấn
                   </button>
                   <button type="button" onClick={handleSchedule}
@@ -201,7 +201,7 @@ export default function Sections({ fire }) {
                   type="password"
                   className="w-full border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Mật khẩu (ít nhất 8 ký tự)" />
-                <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition-colors">
+                <button id="btn-register" type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition-colors">
                   Tạo tài khoản miễn phí
                 </button>
               </form>
