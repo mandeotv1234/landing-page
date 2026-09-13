@@ -148,7 +148,7 @@ export default function Sections({ fire }) {
                   <button id="btn-lead" type="submit" className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
                     Gửi yêu cầu tư vấn
                   </button>
-                  <button type="button" onClick={handleSchedule}
+                  <button id="btn-schedule" type="button" onClick={handleSchedule}
                     className="flex items-center gap-2 border border-slate-200 hover:bg-slate-100 text-slate-700 font-semibold py-3 px-4 rounded-xl transition-colors text-sm">
                     <Calendar size={16} /> Đặt lịch
                   </button>
@@ -169,7 +169,7 @@ export default function Sections({ fire }) {
                 </div>
               ))}
             </div>
-            <button onClick={handleLocation}
+            <button id="btn-find-location" onClick={handleLocation}
               className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
               <MapPin size={18} /> Tìm cửa hàng gần tôi
             </button>
@@ -224,7 +224,7 @@ export default function Sections({ fire }) {
                     type="email"
                     className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-500"
                     placeholder="your@email.com" />
-                  <button type="submit" className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-5 py-3 rounded-xl transition-colors text-sm">
+                  <button id="btn-subscribe" type="submit" className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-5 py-3 rounded-xl transition-colors text-sm">
                     Đăng ký
                   </button>
                 </form>
@@ -240,7 +240,7 @@ export default function Sections({ fire }) {
               <div className="flex gap-2 flex-wrap">
                 {[50000, 100000, 200000, 500000].map(amt => (
                   <button key={amt} onClick={() => handleDonate(amt)}
-                    className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-all ${donateDone ? 'border-green-400 text-green-600 bg-green-50' : 'border-amber-300 text-amber-700 hover:bg-amber-100'}`}>
+                    className={`btn-donate px-4 py-2 rounded-xl text-sm font-semibold border transition-all ${donateDone ? 'border-green-400 text-green-600 bg-green-50' : 'border-amber-300 text-amber-700 hover:bg-amber-100'}`}>
                     {donateDone ? '✓' : ''} {(amt / 1000)}k
                   </button>
                 ))}
@@ -270,7 +270,7 @@ export default function Sections({ fire }) {
               <input required value={applyForm.province} onChange={e => setApplyForm({...applyForm, province: e.target.value})}
                 className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tỉnh / thành phố" />
-              <button type="submit" className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm whitespace-nowrap">
+              <button id="btn-submit-application" type="submit" className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm whitespace-nowrap">
                 Gửi đơn
               </button>
             </form>

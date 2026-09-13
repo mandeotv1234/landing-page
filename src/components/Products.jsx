@@ -73,7 +73,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
                 {p.emoji}
                 <button
                   onClick={e => toggleWishlist(p, e)}
-                  className="absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
+                  className="btn-wishlist absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
                 >
                   <Heart
                     size={16}

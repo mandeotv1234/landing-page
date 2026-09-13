@@ -42,6 +42,7 @@ export default function Hero({ fire }) {
               Khám phá ngay <ChevronRight size={18} />
             </a>
             <button
+              id="btn-start-trial"
               onClick={handleStartTrial}
               className={`inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-xl transition-all ${trialDone ? 'bg-green-600/30 border-green-500/50' : ''}`}
             >
