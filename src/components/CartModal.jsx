@@ -13,8 +13,8 @@ export default function CartModal({ cart, setCart, onClose, onCheckout }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex justify-end" onClick={onClose}>
-      <div className="bg-white w-full sm:max-w-md h-full flex flex-col animate-slide-up" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 bg-black/50 z-50 flex justify-end" onClick={e => { if (e.target === e.currentTarget) onClose() }}>
+      <div className="bg-white w-full sm:max-w-md h-full flex flex-col animate-slide-up">
         <div className="flex items-center justify-between p-5 border-b border-slate-200">
           <h2 className="text-lg font-bold text-slate-900">Giỏ hàng ({cart.length} sản phẩm)</h2>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-700">
