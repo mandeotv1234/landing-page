@@ -69,12 +69,12 @@ export default function Sections({ fire }) {
   return (
     <>
       {/* Customize section */}
-      <section className="py-16 px-4 bg-slate-900 text-white" id="customize">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 items-center">
-          {/* Preview */}
-          <div className="flex-1 flex justify-center">
+      <section className="py-10 md:py-16 px-4 bg-slate-900 text-white" id="customize">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+          {/* Preview — ẩn trên mobile nhỏ */}
+          <div className="hidden sm:flex flex-1 justify-center">
             <div
-              className="w-48 h-80 rounded-[2.5rem] border-4 border-slate-700 flex items-center justify-center text-6xl shadow-2xl transition-all duration-500"
+              className="w-40 h-64 md:w-48 md:h-80 rounded-[2.5rem] border-4 border-slate-700 flex items-center justify-center text-6xl shadow-2xl transition-all duration-500"
               style={{ background: `linear-gradient(135deg, ${color.hex}cc, ${color.hex}66)` }}
             >
               📱
@@ -126,7 +126,7 @@ export default function Sections({ fire }) {
       </section>
 
       {/* Contact & Lead */}
-      <section id="contact" className="py-16 px-4 bg-white">
+      <section id="contact" className="py-10 md:py-16 px-4 bg-white">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Lead form */}
           <div className="bg-slate-50 rounded-2xl p-6">
@@ -139,10 +139,10 @@ export default function Sections({ fire }) {
             ) : (
               <form onSubmit={handleLead} className="space-y-4">
                 <input required value={leadForm.name} onChange={e => setLeadForm({...leadForm, name: e.target.value})}
-                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Họ và tên" />
                 <input required value={leadForm.phone} onChange={e => setLeadForm({...leadForm, phone: e.target.value})}
-                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Số điện thoại" />
                 <div className="flex gap-3">
                   <button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
@@ -178,7 +178,7 @@ export default function Sections({ fire }) {
       </section>
 
       {/* Register + Subscribe */}
-      <section className="py-16 px-4 bg-slate-50">
+      <section className="py-10 md:py-16 px-4 bg-slate-50">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Register */}
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
@@ -195,11 +195,11 @@ export default function Sections({ fire }) {
               <form onSubmit={handleRegister} className="space-y-4">
                 <input required value={regForm.email} onChange={e => setRegForm({...regForm, email: e.target.value})}
                   type="email"
-                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Email của bạn" />
                 <input required value={regForm.pass} onChange={e => setRegForm({...regForm, pass: e.target.value})}
                   type="password"
-                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Mật khẩu (ít nhất 8 ký tự)" />
                 <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition-colors">
                   Tạo tài khoản miễn phí
@@ -219,10 +219,10 @@ export default function Sections({ fire }) {
               {subDone ? (
                 <div className="text-green-600 font-semibold text-sm py-2">✓ Cảm ơn bạn! Event <code className="bg-green-50 px-2 py-0.5 rounded">Subscribe</code> đã gửi.</div>
               ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-2">
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
                   <input required value={subEmail} onChange={e => setSubEmail(e.target.value)}
                     type="email"
-                    className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-500"
                     placeholder="your@email.com" />
                   <button type="submit" className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-5 py-3 rounded-xl transition-colors text-sm">
                     Đăng ký
@@ -251,7 +251,7 @@ export default function Sections({ fire }) {
       </section>
 
       {/* Apply as dealer */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-10 md:py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex items-center justify-center gap-2 text-blue-600 font-semibold text-sm mb-2">
             <Briefcase size={16} /> Đại lý ZTech
@@ -265,10 +265,10 @@ export default function Sections({ fire }) {
           ) : (
             <form onSubmit={handleApply} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
               <input required value={applyForm.name} onChange={e => setApplyForm({...applyForm, name: e.target.value})}
-                className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tên cửa hàng / doanh nghiệp" />
               <input required value={applyForm.province} onChange={e => setApplyForm({...applyForm, province: e.target.value})}
-                className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tỉnh / thành phố" />
               <button type="submit" className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm whitespace-nowrap">
                 Gửi đơn

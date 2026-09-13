@@ -30,8 +30,8 @@ export default function CheckoutModal({ cart, onClose, fire }) {
   const steps = ['Thông tin', 'Thanh toán', 'Hoàn tất']
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl w-full max-w-lg animate-slide-up overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center sm:p-4">
+      <div className="bg-white rounded-t-2xl sm:rounded-2xl w-full sm:max-w-lg animate-slide-up overflow-hidden max-h-[95vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-slate-200">
           <h2 className="font-bold text-slate-900">Thanh toán</h2>
