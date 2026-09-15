@@ -26,7 +26,11 @@ export default function App() {
   }, [])
 
   const handleCheckout = () => {
-    setShowCart(false)
+    // Defer unmount so ztracker's document-level click listener can still
+    // traverse #btn-initiate-checkout's parent chain before React detaches it.
+    // React 18 (createRoot) commits setShowCart synchronously at div#root BEFORE
+    // the click event reaches document, leaving t.target detached → infinite loop.
+    setTimeout(() => setShowCart(false), 0)
     setShowCheckout(true)
     fire('InitiateCheckout', {
       value: cart.reduce((s, i) => s + i.price * i.qty, 0),
