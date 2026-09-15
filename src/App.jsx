@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { usePixel } from './hooks/usePixel'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -6,23 +6,16 @@ import Products from './components/Products'
 import CartModal from './components/CartModal'
 import CheckoutModal from './components/CheckoutModal'
 import Sections from './components/Sections'
-import EventLog from './components/EventLog'
 
-const DEFAULT_PIXEL_ID = '7071675013144936448'
+const PIXEL_ID = '7071675013144936448'
 
 export default function App() {
-  const [pixelId, setPixelId] = useState(DEFAULT_PIXEL_ID)
-  const [events, setEvents] = useState([])
   const [cart, setCart] = useState([])
   const [wishlist, setWishlist] = useState([])
   const [showCart, setShowCart] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
 
-  const onEvent = useCallback((entry) => {
-    setEvents(prev => [entry, ...prev].slice(0, 30))
-  }, [])
-
-  const { fire } = usePixel(pixelId, onEvent)
+  const { fire } = usePixel(PIXEL_ID)
 
   useEffect(() => {
     fire('ViewContent', {
@@ -65,7 +58,6 @@ export default function App() {
         <CheckoutModal cart={cart} onClose={() => { setShowCheckout(false); setCart([]) }} fire={fire} />
       )}
 
-      <EventLog events={events} pixelId={pixelId} setPixelId={setPixelId} />
     </div>
   )
 }
