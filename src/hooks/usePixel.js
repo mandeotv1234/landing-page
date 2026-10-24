@@ -1,19 +1,12 @@
 import { useCallback } from 'react'
+import { ZaloAdsPixel } from '@zalo-ads/pixel-sdk'
 
-export function usePixel(pixelId) {
+// ZaloAdsPixel.init() đã gọi ở module scope của App.jsx (đúng khuyến nghị README: gọi đúng một
+// lần, sớm nhất có thể). track() không cần pixelId mỗi lần gọi — SDK gửi cho pixel đã init().
+export function usePixel() {
   const fire = useCallback((eventName, params = {}) => {
-    window.dataLayer = window.dataLayer || []
-    window.dataLayer.push({
-      event: 'zp_track',
-      zp_event_name: eventName,
-      zp_pixel_id: pixelId,
-      ...params,
-    })
-
-    if (typeof window.ztrq === 'function') {
-      try { window.ztrq('track', eventName, params) } catch (_) {}
-    }
-  }, [pixelId])
+    ZaloAdsPixel.track(eventName, params)
+  }, [])
 
   return { fire }
 }

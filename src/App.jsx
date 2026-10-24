@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { ZaloAdsPixel } from '@zalo-ads/pixel-sdk'
 import { usePixel } from './hooks/usePixel'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -9,13 +10,18 @@ import Sections from './components/Sections'
 
 const PIXEL_ID = '7519820900280041472'
 
+// Gọi đúng một lần ở module scope — khớp hướng dẫn README: "gọi init() một lần duy nhất trong
+// vòng đời ứng dụng, tại điểm khởi tạo sớm nhất có thể". Gọi lại với cùng pixelId là vô hại
+// (SDK chỉ cập nhật cờ debug), nên StrictMode double-invoke lúc dev không phải vấn đề.
+ZaloAdsPixel.init({ pixelId: PIXEL_ID })
+
 export default function App() {
   const [cart, setCart] = useState([])
   const [wishlist, setWishlist] = useState([])
   const [showCart, setShowCart] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
 
-  const { fire } = usePixel(PIXEL_ID)
+  const { fire } = usePixel()
 
   useEffect(() => {
     fire('ViewContent', {
@@ -51,8 +57,8 @@ export default function App() {
 
       <footer className="bg-slate-900 text-slate-400 text-center text-sm py-8 px-4">
         <div className="text-white font-bold text-lg mb-1">ZTech</div>
-        <p className="mb-1">Demo landing page cho Zalo Pixel GTM Template</p>
-        <p className="text-xs text-slate-500">Mọi sự kiện được ghi nhận thực tế qua GTM + Zalo Pixel tracker</p>
+        <p className="mb-1">Demo landing page cho @zalo-ads/pixel-sdk</p>
+        <p className="text-xs text-slate-500">Mọi sự kiện được ghi nhận thực tế qua Zalo Ads Pixel SDK</p>
       </footer>
 
       {showCart && (
