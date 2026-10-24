@@ -7,7 +7,7 @@ import CartModal from './components/CartModal'
 import CheckoutModal from './components/CheckoutModal'
 import Sections from './components/Sections'
 
-const PIXEL_ID = '7071675013144936448'
+const PIXEL_ID = '7519820900280041472'
 
 export default function App() {
   const [cart, setCart] = useState([])
