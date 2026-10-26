@@ -9,11 +9,14 @@ import CheckoutModal from './components/CheckoutModal'
 import Sections from './components/Sections'
 
 const PIXEL_ID = '7519820900280041472'
+const PIXEL_SCRIPT_URL = 'https://dev-adtima-static.zdn.vn/ztr/ztracker.js'
 
 // Gọi đúng một lần ở module scope — khớp hướng dẫn README: "gọi init() một lần duy nhất trong
 // vòng đời ứng dụng, tại điểm khởi tạo sớm nhất có thể". Gọi lại với cùng pixelId là vô hại
 // (SDK chỉ cập nhật cờ debug), nên StrictMode double-invoke lúc dev không phải vấn đề.
-ZaloAdsPixel.init({ pixelId: PIXEL_ID })
+// scriptUrl trỏ CDN staging thay vì mặc định s.zzcdn.me (production) để nhận bản ztracker mới
+// nhất chưa lên production.
+ZaloAdsPixel.init({ pixelId: PIXEL_ID, scriptUrl: PIXEL_SCRIPT_URL })
 
 export default function App() {
   const [cart, setCart] = useState([])
