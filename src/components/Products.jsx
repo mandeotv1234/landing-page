@@ -22,10 +22,13 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
       if (exists) return prev.map(i => i.id === product.id ? { ...i, qty: i.qty + 1 } : i)
       return [...prev, { ...product, qty: 1 }]
     })
-    // Không gọi fire('AddToCart', ...) ở đây: nút #btn-add-to-cart đã được pixel ghi nhận
-    // qua cấu hình Event Builder (Button Trigger, ID "btn-add-to-cart") trên dashboard.
-    // ztracker khớp sự kiện theo TÊN (track() thủ công) và theo CLICK (webElement) độc lập
-    // với nhau — gọi cả hai cho cùng một click khiến /ptrck/log bắn 2 lần cho một lần bấm.
+    fire('AddToCart', {
+      content_id: product.id,
+      content_type: 'product',
+      quantity: 1,
+      value: product.price,
+      currency: 'VND',
+    })
     setAdded(a => ({ ...a, [product.id]: true }))
     setTimeout(() => setAdded(a => ({ ...a, [product.id]: false })), 2000)
   }
@@ -33,7 +36,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
   const toggleWishlist = (product) => {
     const inWL = wishlist.includes(product.id)
     setWishlist(prev => inWL ? prev.filter(i => i !== product.id) : [...prev, product.id])
-    if (!inWL) fire('AddToWishlist', { content_id: product.id, content_name: product.name })
+    if (!inWL) fire('AddToWishlist', { content_id: product.id, contents: [{ id: product.id, quantity: 1 }] })
   }
 
   const viewProduct = (product) => {

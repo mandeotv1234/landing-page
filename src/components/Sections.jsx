@@ -44,7 +44,7 @@ export default function Sections({ fire }) {
 
   const handleRegister = (e) => {
     e.preventDefault()
-    fire('CompleteRegistration')
+    fire('CompleteRegistration', { content_id: 'membership', content_name: 'Đăng ký thành viên ZTech' })
     setRegDone(true)
   }
 
