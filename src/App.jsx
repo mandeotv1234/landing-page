@@ -8,7 +8,7 @@ import CartModal from './components/CartModal'
 import CheckoutModal from './components/CheckoutModal'
 import Sections from './components/Sections'
 
-const PIXEL_ID = '7519820900280041472'
+const PIXEL_ID = '7525140531349815296'
 const PIXEL_SCRIPT_URL = 'https://dev-adtima-static.zdn.vn/ztr/ztracker.js'
 
 // Gọi đúng một lần ở module scope — khớp hướng dẫn README: "gọi init() một lần duy nhất trong
