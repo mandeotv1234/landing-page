@@ -32,10 +32,13 @@ export default function Sections({ fire }) {
     })
   }
 
+  // Cac setXDone(true) ben duoi unmount chinh form/button vua duoc bam (swap sang thong bao
+  // thanh cong) — defer qua setTimeout(0) de listener click cap document cua ztracker kip
+  // chay xong truoc khi React detach DOM (cung race da fix o App.jsx/Products.jsx).
   const handleLead = (e) => {
     e.preventDefault()
     fire('Lead')
-    setLeadDone(true)
+    setTimeout(() => setLeadDone(true), 0)
   }
 
   const handleSchedule = () => fire('Schedule')
@@ -45,13 +48,13 @@ export default function Sections({ fire }) {
   const handleRegister = (e) => {
     e.preventDefault()
     fire('CompleteRegistration', { content_id: 'membership', content_name: 'Đăng ký thành viên ZTech' })
-    setRegDone(true)
+    setTimeout(() => setRegDone(true), 0)
   }
 
   const handleSubscribe = (e) => {
     e.preventDefault()
     fire('Subscribe')
-    setSubDone(true)
+    setTimeout(() => setSubDone(true), 0)
   }
 
   const handleDonate = (amount) => {
@@ -63,7 +66,7 @@ export default function Sections({ fire }) {
   const handleApply = (e) => {
     e.preventDefault()
     fire('SubmitApplication')
-    setApplyDone(true)
+    setTimeout(() => setApplyDone(true), 0)
   }
 
   return (

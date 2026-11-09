@@ -131,7 +131,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
             <div className="text-2xl font-bold text-blue-600 mb-4">{fmt(selected.price)}</div>
             <div className="flex gap-3">
               <button
-                onClick={() => { addToCart(selected); setSelected(null) }}
+                onClick={() => { addToCart(selected); setTimeout(() => setSelected(null), 0) }}
                 className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-semibold transition-colors"
               >
                 Thêm vào giỏ hàng

@@ -10,21 +10,23 @@ export default function CheckoutModal({ cart, onClose, fire }) {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0)
   const contents = cart.map(i => ({ id: i.id, quantity: i.qty }))
 
+  // setStep unmounts the step vua submit (swap sang step ke) — defer qua setTimeout(0) de
+  // listener click cap document cua ztracker kip chay xong truoc khi React detach DOM.
   const submitInfo = (e) => {
     e.preventDefault()
-    setStep(2)
+    setTimeout(() => setStep(2), 0)
   }
 
   const submitPayment = (e) => {
     e.preventDefault()
     fire('AddPaymentInfo', { currency: 'VND', value: total })
-    setStep(3)
     fire('Purchase', {
       currency: 'VND',
       value: total,
       contents,
       content_type: 'product',
     })
+    setTimeout(() => setStep(3), 0)
   }
 
   const steps = ['Thông tin', 'Thanh toán', 'Hoàn tất']
@@ -106,7 +108,7 @@ export default function CheckoutModal({ cart, onClose, fire }) {
                 </div>
               </div>
               <div className="flex justify-between items-center pt-2">
-                <button type="button" onClick={() => setStep(1)} className="text-slate-500 hover:text-slate-800 text-sm">← Quay lại</button>
+                <button type="button" onClick={() => setTimeout(() => setStep(1), 0)} className="text-slate-500 hover:text-slate-800 text-sm">← Quay lại</button>
                 <button id="btn-purchase" type="submit" className="bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-colors">
                   Xác nhận đặt hàng {fmt(total)}
                 </button>

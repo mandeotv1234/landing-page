@@ -6,10 +6,15 @@ export default function CartModal({ cart, setCart, onClose, onCheckout }) {
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0)
 
   const updateQty = (id, delta) => {
-    setCart(prev => prev.map(i => i.id === id
-      ? { ...i, qty: Math.max(0, i.qty + delta) }
-      : i
-    ).filter(i => i.qty > 0))
+    // Khi delta dua qty ve 0, dong setCart ben duoi xoa luon item (va nut vua bam) khoi DOM —
+    // defer qua setTimeout(0) de listener click cap document cua ztracker kip chay xong truoc
+    // khi React detach DOM (cung race da fix o App.jsx/Products.jsx/CheckoutModal.jsx).
+    setTimeout(() => {
+      setCart(prev => prev.map(i => i.id === id
+        ? { ...i, qty: Math.max(0, i.qty + delta) }
+        : i
+      ).filter(i => i.qty > 0))
+    }, 0)
   }
 
   return (
