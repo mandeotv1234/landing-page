@@ -113,7 +113,15 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
 
       {/* Product detail modal */}
       {selected && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelected(null)}>
+        <div
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+          onClick={() => {
+            // Defer unmount so ztracker's document-level click listener can still
+            // traverse the clicked element's parent chain before React detaches it
+            // (same race as CartModal's close — see App.jsx handleCheckout).
+            setTimeout(() => setSelected(null), 0)
+          }}
+        >
           <div className="bg-white rounded-2xl max-w-md w-full p-6 animate-slide-up" onClick={e => e.stopPropagation()}>
             <div className={`h-48 bg-gradient-to-br ${selected.color} rounded-xl flex items-center justify-center text-7xl mb-4`}>
               {selected.emoji}

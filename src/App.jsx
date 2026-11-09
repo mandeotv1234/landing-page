@@ -65,10 +65,21 @@ export default function App() {
       </footer>
 
       {showCart && (
-        <CartModal cart={cart} setCart={setCart} onClose={() => setShowCart(false)} onCheckout={handleCheckout} />
+        <CartModal
+          cart={cart}
+          setCart={setCart}
+          // Defer unmount so ztracker's document-level click listener can still
+          // traverse the clicked element's parent chain before React detaches it.
+          onClose={() => setTimeout(() => setShowCart(false), 0)}
+          onCheckout={handleCheckout}
+        />
       )}
       {showCheckout && (
-        <CheckoutModal cart={cart} onClose={() => { setShowCheckout(false); setCart([]) }} fire={fire} />
+        <CheckoutModal
+          cart={cart}
+          onClose={() => setTimeout(() => { setShowCheckout(false); setCart([]) }, 0)}
+          fire={fire}
+        />
       )}
 
     </div>
