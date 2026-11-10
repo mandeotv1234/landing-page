@@ -138,7 +138,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
               </button>
               <button
                 onClick={() => toggleWishlist(selected)}
-                className="w-12 h-12 border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50"
+                className="btn-wishlist w-12 h-12 border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50"
               >
                 <Heart size={20} className={wishlist.includes(selected.id) ? 'fill-red-500 text-red-500' : 'text-slate-400'} />
               </button>
