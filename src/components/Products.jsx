@@ -68,15 +68,21 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
               {/* Image area */}
               <div className={`h-44 bg-gradient-to-br ${p.color} flex items-center justify-center text-6xl relative`}>
                 {p.emoji}
-                <button
-                  onClick={() => toggleWishlist(p)}
-                  className="btn-wishlist absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
-                >
-                  <Heart
-                    size={16}
-                    className={wishlist.includes(p.id) ? 'fill-red-500 text-red-500' : 'text-white'}
-                  />
-                </button>
+                <div className="absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 transition-colors">
+                  {/* btn-wishlist is the only class on this element — kept free of Tailwind
+                      utility classes so dashboard event tools can target it by a single,
+                      stable class instead of the full (and volatile) styling className. */}
+                  <button
+                    onClick={() => toggleWishlist(p)}
+                    className="btn-wishlist"
+                    style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    <Heart
+                      size={16}
+                      className={wishlist.includes(p.id) ? 'fill-red-500 text-red-500' : 'text-white'}
+                    />
+                  </button>
+                </div>
               </div>
 
               {/* Info */}
@@ -136,12 +142,15 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
               >
                 Thêm vào giỏ hàng
               </button>
-              <button
-                onClick={() => toggleWishlist(selected)}
-                className="btn-wishlist w-12 h-12 border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50"
-              >
-                <Heart size={20} className={wishlist.includes(selected.id) ? 'fill-red-500 text-red-500' : 'text-slate-400'} />
-              </button>
+              <div className="w-12 h-12 border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50">
+                <button
+                  onClick={() => toggleWishlist(selected)}
+                  className="btn-wishlist"
+                  style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  <Heart size={20} className={wishlist.includes(selected.id) ? 'fill-red-500 text-red-500' : 'text-slate-400'} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
