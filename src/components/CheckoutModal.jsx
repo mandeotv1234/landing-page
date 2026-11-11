@@ -4,7 +4,7 @@ import { X, CreditCard, Check } from 'lucide-react'
 const fmt = (n) => n.toLocaleString('vi-VN') + ' ₫'
 
 export default function CheckoutModal({ cart, onClose, fire }) {
-  const [step, setStep] = useState(1) // 1=info, 2=payment, 3=done
+  const [step, setStep] = useState(1) // 1=info, 2=payment, 3=review, 4=done
   const [form, setForm] = useState({ name: '', phone: '', address: '', card: '', exp: '', cvv: '' })
 
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0)
@@ -17,19 +17,26 @@ export default function CheckoutModal({ cart, onClose, fire }) {
     setTimeout(() => setStep(2), 0)
   }
 
-  const submitPayment = (e) => {
+  // AddPaymentInfo fire rieng o day — luc the thanh toan vua duoc nhap xong — tach khoi
+  // Purchase (chi fire o buoc 3 khi bam "Xac nhan dat hang"). Truoc day ca 2 fire chung
+  // 1 nut nen QC khong test rieng tung event duoc.
+  const submitPaymentInfo = (e) => {
     e.preventDefault()
     fire('AddPaymentInfo', { currency: 'VND', value: total })
+    setTimeout(() => setStep(3), 0)
+  }
+
+  const confirmPurchase = () => {
     fire('Purchase', {
       currency: 'VND',
       value: total,
       contents,
       content_type: 'product',
     })
-    setTimeout(() => setStep(3), 0)
+    setTimeout(() => setStep(4), 0)
   }
 
-  const steps = ['Thông tin', 'Thanh toán', 'Hoàn tất']
+  const steps = ['Thông tin', 'Thanh toán', 'Xác nhận', 'Hoàn tất']
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center sm:p-4">
@@ -82,7 +89,7 @@ export default function CheckoutModal({ cart, onClose, fire }) {
 
           {/* Step 2: Payment */}
           {step === 2 && (
-            <form onSubmit={submitPayment} className="space-y-4">
+            <form onSubmit={submitPaymentInfo} className="space-y-4">
               <div className="flex items-center gap-2 text-sm text-slate-600 bg-slate-50 p-3 rounded-xl">
                 <CreditCard size={18} className="text-blue-500" />
                 Thanh toán thẻ tín dụng / ghi nợ
@@ -109,15 +116,40 @@ export default function CheckoutModal({ cart, onClose, fire }) {
               </div>
               <div className="flex justify-between items-center pt-2">
                 <button type="button" onClick={() => setTimeout(() => setStep(1), 0)} className="text-slate-500 hover:text-slate-800 text-sm">← Quay lại</button>
-                <button id="btn-purchase" type="submit" className="btn-purchase bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-colors">
-                  Xác nhận đặt hàng {fmt(total)}
+                <button id="btn-add-payment-info" type="submit" className="btn-add-payment-info bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors">
+                  Lưu thẻ & xem lại đơn →
                 </button>
               </div>
             </form>
           )}
 
-          {/* Step 3: Done */}
+          {/* Step 3: Review & confirm — Purchase chi fire o day, tach rieng khoi AddPaymentInfo */}
           {step === 3 && (
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-sm text-slate-600 bg-slate-50 p-3 rounded-xl">
+                <Check size={18} className="text-green-500" />
+                Đã lưu thông tin thẻ, kiểm tra lại đơn hàng trước khi xác nhận
+              </div>
+              <div className="border border-slate-200 rounded-xl divide-y divide-slate-100">
+                {cart.map(item => (
+                  <div key={item.id} className="flex items-center justify-between px-4 py-3 text-sm">
+                    <span className="text-slate-700">{item.name} <span className="text-slate-400">x{item.qty}</span></span>
+                    <span className="font-semibold text-slate-900">{fmt(item.price * item.qty)}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-between items-center pt-2">
+                <button type="button" onClick={() => setTimeout(() => setStep(2), 0)} className="text-slate-500 hover:text-slate-800 text-sm">← Quay lại</button>
+                <span className="font-bold text-slate-900">Tổng: <span className="text-blue-600">{fmt(total)}</span></span>
+              </div>
+              <button id="btn-purchase" onClick={confirmPurchase} className="btn-purchase w-full bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-colors">
+                Xác nhận đặt hàng {fmt(total)}
+              </button>
+            </div>
+          )}
+
+          {/* Step 4: Done */}
+          {step === 4 && (
             <div className="text-center py-8">
               <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Check size={40} className="text-green-600" />
