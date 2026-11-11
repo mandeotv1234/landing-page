@@ -5,7 +5,7 @@ export default function Hero({ fire }) {
   const [trialDone, setTrialDone] = useState(false)
 
   const handleStartTrial = () => {
-    fire('StartTrial')
+    fire('StartTrial', { content_id: 'trial-zphone-pro-15', content_name: 'Dùng thử 30 ngày' })
     setTrialDone(true)
     setTimeout(() => setTrialDone(false), 3000)
   }
@@ -35,16 +35,17 @@ export default function Hero({ fire }) {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
             <a
+              id="btn-view-content-hero"
               href="#products"
               onClick={() => fire('ViewContent', { content_id: 'products', content_name: 'Danh sách sản phẩm', content_type: 'product' })}
-              className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors"
+              className="btn-view-content-hero inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors"
             >
               Khám phá ngay <ChevronRight size={18} />
             </a>
             <button
               id="btn-start-trial"
               onClick={handleStartTrial}
-              className={`inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-xl transition-all ${trialDone ? 'bg-green-600/30 border-green-500/50' : ''}`}
+              className={`btn-start-trial inline-flex items-center justify-center gap-2 border border-white/30 hover:border-white/60 text-white px-6 py-3 rounded-xl transition-all ${trialDone ? 'bg-green-600/30 border-green-500/50' : ''}`}
             >
               <Play size={16} />
               {trialDone ? '✓ Đã đăng ký!' : 'Dùng thử 30 ngày'}

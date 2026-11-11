@@ -13,7 +13,7 @@ export default function Header({ fire, cart, onCartOpen }) {
   }
 
   const handleContact = () => {
-    fire('Contact')
+    fire('Contact', { content_name: 'Hotline 1900 1234', method: 'phone' })
     window.open('tel:19001234')
   }
 
@@ -37,9 +37,15 @@ export default function Header({ fire, cart, onCartOpen }) {
               placeholder="Tìm kiếm sản phẩm..."
               className="w-full bg-slate-800 text-white placeholder-slate-400 rounded-lg pl-4 pr-10 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
-              <Search size={16} />
-            </button>
+            <div className="btn-search absolute right-1.5 top-1/2 -translate-y-1/2" style={{ display: 'contents' }}>
+              <button
+                type="submit"
+                id="btn-search"
+                className="flex items-center gap-1 text-slate-400 hover:text-white bg-slate-700/60 hover:bg-slate-700 rounded-md px-2 py-1 text-xs absolute right-1.5 top-1/2 -translate-y-1/2"
+              >
+                <Search size={13} /> Tìm
+              </button>
+            </div>
           </div>
         </form>
 
@@ -47,7 +53,7 @@ export default function Header({ fire, cart, onCartOpen }) {
         <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300">
           <a href="#products" className="hover:text-white transition-colors">Sản phẩm</a>
           <a href="#contact" className="hover:text-white transition-colors">Liên hệ</a>
-          <button onClick={handleContact} className="hover:text-blue-400 transition-colors">
+          <button id="btn-contact" onClick={handleContact} className="btn-contact hover:text-blue-400 transition-colors">
             1900 1234
           </button>
         </nav>
@@ -81,9 +87,9 @@ export default function Header({ fire, cart, onCartOpen }) {
               placeholder="Tìm kiếm..."
               className="flex-1 bg-slate-700 text-white placeholder-slate-400 rounded px-3 py-2 text-sm outline-none"
             />
-            <button type="submit" className="bg-blue-600 text-white px-3 py-2 rounded text-sm">Tìm</button>
+            <button type="submit" id="btn-search" className="btn-search bg-blue-600 text-white px-3 py-2 rounded text-sm">Tìm</button>
           </form>
-          <button onClick={handleContact} className="text-left hover:text-blue-400">1900 1234</button>
+          <button id="btn-contact" onClick={handleContact} className="btn-contact text-left hover:text-blue-400">1900 1234</button>
         </div>
       )}
     </header>

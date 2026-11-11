@@ -37,13 +37,13 @@ export default function Sections({ fire }) {
   // chay xong truoc khi React detach DOM (cung race da fix o App.jsx/Products.jsx).
   const handleLead = (e) => {
     e.preventDefault()
-    fire('Lead')
+    fire('Lead', { content_name: 'Đăng ký tư vấn miễn phí', value: 500000, currency: 'VND' })
     setTimeout(() => setLeadDone(true), 0)
   }
 
-  const handleSchedule = () => fire('Schedule')
+  const handleSchedule = () => fire('Schedule', { content_name: 'Đặt lịch tư vấn tại cửa hàng' })
 
-  const handleLocation = () => fire('FindLocation')
+  const handleLocation = () => fire('FindLocation', { content_name: 'Tìm cửa hàng gần nhất' })
 
   const handleRegister = (e) => {
     e.preventDefault()
@@ -53,7 +53,7 @@ export default function Sections({ fire }) {
 
   const handleSubscribe = (e) => {
     e.preventDefault()
-    fire('Subscribe')
+    fire('Subscribe', { content_name: 'Đăng ký nhận tin ZTech' })
     setTimeout(() => setSubDone(true), 0)
   }
 
@@ -65,7 +65,7 @@ export default function Sections({ fire }) {
 
   const handleApply = (e) => {
     e.preventDefault()
-    fire('SubmitApplication')
+    fire('SubmitApplication', { content_name: 'Đăng ký đại lý ZTech' })
     setTimeout(() => setApplyDone(true), 0)
   }
 
@@ -97,8 +97,9 @@ export default function Sections({ fire }) {
                 {COLORS.map(c => (
                   <button
                     key={c.name}
+                    id="btn-customize"
                     onClick={() => handleCustomize('color', c)}
-                    className={`w-10 h-10 rounded-full border-4 transition-all ${color.name === c.name ? 'border-blue-400 scale-110' : 'border-slate-600'}`}
+                    className={`btn-customize w-10 h-10 rounded-full border-4 transition-all ${color.name === c.name ? 'border-blue-400 scale-110' : 'border-slate-600'}`}
                     style={{ background: c.hex }}
                     title={c.name}
                   />
@@ -112,8 +113,9 @@ export default function Sections({ fire }) {
                 {STORAGES.map(s => (
                   <button
                     key={s}
+                    id="btn-customize"
                     onClick={() => handleCustomize('storage', s)}
-                    className={`px-5 py-2 rounded-xl border text-sm font-semibold transition-all ${storage === s ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-600 text-slate-300 hover:border-slate-400'}`}
+                    className={`btn-customize px-5 py-2 rounded-xl border text-sm font-semibold transition-all ${storage === s ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-600 text-slate-300 hover:border-slate-400'}`}
                   >
                     {s}
                   </button>
@@ -148,11 +150,11 @@ export default function Sections({ fire }) {
                   className="w-full border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Số điện thoại" />
                 <div className="flex gap-3">
-                  <button id="btn-lead" type="submit" className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+                  <button id="btn-lead" type="submit" className="btn-lead flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
                     Gửi yêu cầu tư vấn
                   </button>
                   <button id="btn-schedule" type="button" onClick={handleSchedule}
-                    className="flex items-center gap-2 border border-slate-200 hover:bg-slate-100 text-slate-700 font-semibold py-3 px-4 rounded-xl transition-colors text-sm">
+                    className="btn-schedule flex items-center gap-2 border border-slate-200 hover:bg-slate-100 text-slate-700 font-semibold py-3 px-4 rounded-xl transition-colors text-sm">
                     <Calendar size={16} /> Đặt lịch
                   </button>
                 </div>
@@ -173,7 +175,7 @@ export default function Sections({ fire }) {
               ))}
             </div>
             <button id="btn-find-location" onClick={handleLocation}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+              className="btn-find-location w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
               <MapPin size={18} /> Tìm cửa hàng gần tôi
             </button>
           </div>
@@ -204,7 +206,7 @@ export default function Sections({ fire }) {
                   type="password"
                   className="w-full border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Mật khẩu (ít nhất 8 ký tự)" />
-                <button id="btn-register" type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition-colors">
+                <button id="btn-register" type="submit" className="btn-register w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition-colors">
                   Tạo tài khoản miễn phí
                 </button>
               </form>
@@ -227,7 +229,7 @@ export default function Sections({ fire }) {
                     type="email"
                     className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-emerald-500"
                     placeholder="your@email.com" />
-                  <button id="btn-subscribe" type="submit" className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-5 py-3 rounded-xl transition-colors text-sm">
+                  <button id="btn-subscribe" type="submit" className="btn-subscribe bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-5 py-3 rounded-xl transition-colors text-sm">
                     Đăng ký
                   </button>
                 </form>
@@ -242,7 +244,7 @@ export default function Sections({ fire }) {
               <p className="text-slate-600 text-sm mb-4">Mỗi đóng góp giúp trao tặng thiết bị công nghệ cho học sinh vùng xa</p>
               <div className="flex gap-2 flex-wrap">
                 {[50000, 100000, 200000, 500000].map(amt => (
-                  <button key={amt} onClick={() => handleDonate(amt)}
+                  <button key={amt} id="btn-donate" onClick={() => handleDonate(amt)}
                     className={`btn-donate px-4 py-2 rounded-xl text-sm font-semibold border transition-all ${donateDone ? 'border-green-400 text-green-600 bg-green-50' : 'border-amber-300 text-amber-700 hover:bg-amber-100'}`}>
                     {donateDone ? '✓' : ''} {(amt / 1000)}k
                   </button>
@@ -273,7 +275,7 @@ export default function Sections({ fire }) {
               <input required value={applyForm.province} onChange={e => setApplyForm({...applyForm, province: e.target.value})}
                 className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-base outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Tỉnh / thành phố" />
-              <button id="btn-submit-application" type="submit" className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm whitespace-nowrap">
+              <button id="btn-submit-application" type="submit" className="btn-submit-application bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm whitespace-nowrap">
                 Gửi đơn
               </button>
             </form>

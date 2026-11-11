@@ -63,7 +63,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
             <div
               key={p.id}
               onClick={(e) => { if (!e.target.closest('button')) viewProduct(p) }}
-              className="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
+              className="product-card group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer"
             >
               {/* Image area */}
               <div className={`h-44 bg-gradient-to-br ${p.color} flex items-center justify-center text-6xl relative`}>
@@ -73,6 +73,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
                       utility classes so dashboard event tools can target it by a single,
                       stable class instead of the full (and volatile) styling className. */}
                   <button
+                    id="btn-wishlist"
                     onClick={() => toggleWishlist(p)}
                     className="btn-wishlist"
                     style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -93,22 +94,25 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
                 <div className="font-bold text-blue-600 text-lg mb-4">{fmt(p.price)}</div>
 
                 <div className="flex gap-2">
-                  <button
-                    onClick={() => addToCart(p)}
-                    id="btn-add-to-cart"
-                    className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold text-sm transition-all ${
-                      added[p.id]
-                        ? 'bg-green-500 text-white'
-                        : 'bg-blue-600 hover:bg-blue-500 text-white'
-                    }`}
-                  >
-                    {added[p.id] ? <><Check size={15} /> Đã thêm</> : <><ShoppingCart size={15} /> Thêm giỏ</>}
-                  </button>
+                  <div className="btn-add-to-cart flex-1" style={{ display: 'contents' }}>
+                    <button
+                      onClick={() => addToCart(p)}
+                      id="btn-add-to-cart"
+                      className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-xl font-semibold text-sm transition-all ${
+                        added[p.id]
+                          ? 'bg-green-500 text-white'
+                          : 'bg-blue-600 hover:bg-blue-500 text-white'
+                      }`}
+                    >
+                      {added[p.id] ? <><Check size={15} /> Đã thêm</> : <><ShoppingCart size={15} /> Thêm giỏ</>}
+                    </button>
+                  </div>
                   <button
                     onClick={() => viewProduct(p)}
-                    className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50 text-slate-500 hover:text-slate-900 transition-colors"
+                    id="btn-view-product"
+                    className="btn-view-product flex items-center justify-center gap-1.5 px-3 h-10 border border-slate-200 rounded-xl hover:bg-slate-50 text-slate-500 hover:text-slate-900 transition-colors text-sm"
                   >
-                    <Eye size={16} />
+                    <Eye size={16} /> Xem
                   </button>
                 </div>
               </div>
@@ -137,13 +141,15 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
             <div className="text-2xl font-bold text-blue-600 mb-4">{fmt(selected.price)}</div>
             <div className="flex gap-3">
               <button
+                id="btn-add-to-cart"
                 onClick={() => { addToCart(selected); setTimeout(() => setSelected(null), 0) }}
-                className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-semibold transition-colors"
+                className="btn-add-to-cart flex-1 bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-semibold transition-colors"
               >
                 Thêm vào giỏ hàng
               </button>
               <div className="w-12 h-12 border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50">
                 <button
+                  id="btn-wishlist"
                   onClick={() => toggleWishlist(selected)}
                   className="btn-wishlist"
                   style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}

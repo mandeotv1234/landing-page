@@ -64,7 +64,7 @@ export default function CartModal({ cart, setCart, onClose, onCheckout }) {
             <button
               id="btn-initiate-checkout"
               onClick={onCheckout}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-colors text-lg"
+              className="btn-initiate-checkout w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-colors text-lg"
             >
               Tiến hành thanh toán
             </button>
