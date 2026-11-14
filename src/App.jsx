@@ -44,7 +44,7 @@ export default function App() {
     fire('InitiateCheckout', {
       value: cart.reduce((s, i) => s + i.price * i.qty, 0),
       currency: 'VND',
-      contents: cart.map(i => i.name),
+      contents: cart.map(i => i.id).join(','),
     })
   }
 
