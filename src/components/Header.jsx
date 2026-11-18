@@ -43,7 +43,7 @@ export default function Header({ fire, cart, onCartOpen }) {
                 id="btn-search"
                 className="flex items-center gap-1 text-slate-400 hover:text-white bg-slate-700/60 hover:bg-slate-700 rounded-md px-2 py-1 text-xs absolute right-1.5 top-1/2 -translate-y-1/2"
               >
-                <Search size={13} /> Tìm
+                <Search size={13} id="icon-search" className="icon-search" /> Tìm
               </button>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MapPin, Calendar, Mail, Users, Gift, Briefcase, Palette, ChevronDown } from 'lucide-react'
+import { MapPin, Calendar, Mail, Users, Gift, Briefcase, Palette, ChevronDown, Check } from 'lucide-react'
 
 const COLORS = [
   { name: 'Đen Titan', hex: '#374151' },
@@ -17,6 +17,7 @@ export default function Sections({ fire }) {
   const [subDone, setSubDone] = useState(false)
   const [donateDone, setDonateDone] = useState(false)
   const [applyDone, setApplyDone] = useState(false)
+  const [locationDone, setLocationDone] = useState(false)
   const [leadForm, setLeadForm] = useState({ name: '', phone: '' })
   const [regForm, setRegForm] = useState({ email: '', pass: '' })
   const [subEmail, setSubEmail] = useState('')
@@ -43,7 +44,13 @@ export default function Sections({ fire }) {
 
   const handleSchedule = () => fire('Schedule', { content_name: 'Đặt lịch tư vấn tại cửa hàng' })
 
-  const handleLocation = () => fire('FindLocation', { content_name: 'Tìm cửa hàng gần nhất' })
+  // Giong Donate: chi doi chu ben trong button, KHONG unmount button — giu nguyen
+  // #btn-find-location de listener click cua ztracker (va Event Builder) con target.
+  const handleLocation = () => {
+    fire('FindLocation', { content_name: 'Tìm cửa hàng gần nhất' })
+    setLocationDone(true)
+    setTimeout(() => setLocationDone(false), 2000)
+  }
 
   const handleRegister = (e) => {
     e.preventDefault()
@@ -175,8 +182,10 @@ export default function Sections({ fire }) {
               ))}
             </div>
             <button id="btn-find-location" onClick={handleLocation}
-              className="btn-find-location w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
-              <MapPin size={18} /> Tìm cửa hàng gần tôi
+              className={`btn-find-location w-full font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2 text-white ${locationDone ? 'bg-emerald-600' : 'bg-blue-600 hover:bg-blue-500'}`}>
+              {locationDone
+                ? <><Check size={18} /> Đã fire event FindLocation</>
+                : <><MapPin size={18} /> Tìm cửa hàng gần tôi</>}
             </button>
           </div>
         </div>
