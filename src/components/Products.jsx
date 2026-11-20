@@ -80,7 +80,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
                   >
                     <Heart
                       size={16}
-                      className={wishlist.includes(p.id) ? 'fill-red-500 text-red-500' : 'text-white'}
+                      className={`pointer-events-none ${wishlist.includes(p.id) ? 'fill-red-500 text-red-500' : 'text-white'}`}
                     />
                   </button>
                 </div>
@@ -154,7 +154,7 @@ export default function Products({ fire, cart, setCart, wishlist, setWishlist })
                   className="btn-wishlist"
                   style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <Heart size={20} className={wishlist.includes(selected.id) ? 'fill-red-500 text-red-500' : 'text-slate-400'} />
+                  <Heart size={20} className={`pointer-events-none ${wishlist.includes(selected.id) ? 'fill-red-500 text-red-500' : 'text-slate-400'}`} />
                 </button>
               </div>
             </div>

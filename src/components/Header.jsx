@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Search, ShoppingCart, Menu, X, Smartphone } from 'lucide-react'
 
 export default function Header({ fire, cart, onCartOpen }) {
   const [query, setQuery] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
+  const isSubmittingRef = useRef(false)
 
   const handleSearch = (e) => {
     e.preventDefault()
-    if (!query.trim()) return
-    fire('Search', { query: query.trim() })
+    const trimmed = query.trim()
+    if (!trimmed || isSubmittingRef.current) return
+    isSubmittingRef.current = true
+    fire('Search', { query: trimmed })
     setQuery('')
+    setTimeout(() => {
+      isSubmittingRef.current = false
+    }, 500)
   }
 
   const handleContact = () => {
@@ -43,7 +49,7 @@ export default function Header({ fire, cart, onCartOpen }) {
                 id="btn-search"
                 className="flex items-center gap-1 text-slate-400 hover:text-white bg-slate-700/60 hover:bg-slate-700 rounded-md px-2 py-1 text-xs absolute right-1.5 top-1/2 -translate-y-1/2"
               >
-                <Search size={13} id="icon-search" className="icon-search" /> Tìm
+                <Search size={13} id="icon-search" className="icon-search pointer-events-none" /> Tìm
               </button>
             </div>
           </div>
